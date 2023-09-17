@@ -53,8 +53,6 @@ public class UserView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableuser = new javax.swing.JTable();
         bt_adddata = new javax.swing.JButton();
-        bt_getdata = new javax.swing.JButton();
-        bt_exit = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txt_search = new javax.swing.JTextField();
         bt_search = new javax.swing.JButton();
@@ -79,13 +77,10 @@ public class UserView extends javax.swing.JFrame {
 
         tableuser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tableuser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,25 +94,6 @@ public class UserView extends javax.swing.JFrame {
         bt_adddata.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_adddataMouseClicked(evt);
-            }
-        });
-
-        bt_getdata.setText("ดึงข้อมูล");
-        bt_getdata.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_getdataMouseClicked(evt);
-            }
-        });
-        bt_getdata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_getdataActionPerformed(evt);
-            }
-        });
-
-        bt_exit.setText("ออก");
-        bt_exit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_exitMouseClicked(evt);
             }
         });
 
@@ -148,11 +124,7 @@ public class UserView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(bt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(bt_getdata, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
-                        .addComponent(bt_exit, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -166,10 +138,6 @@ public class UserView extends javax.swing.JFrame {
                     .addComponent(bt_search))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_getdata)
-                    .addComponent(bt_exit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -179,6 +147,7 @@ public class UserView extends javax.swing.JFrame {
         jLabel3.setText("เเก้ไขข้อมูล");
 
         edittxt_id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edittxt_id.setEnabled(false);
 
         jLabel4.setText("USER_ID");
 
@@ -275,20 +244,21 @@ public class UserView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(344, 344, 344))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(344, 344, 344))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(463, 463, 463)
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                .addGap(393, 393, 393))
+                        .addGap(471, 471, 471)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +269,7 @@ public class UserView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -307,32 +277,13 @@ public class UserView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void bt_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_exitMouseClicked
-    System.exit(0);
-}//GEN-LAST:event_bt_exitMouseClicked
-
 private void bt_adddataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adddataMouseClicked
     JFrame jf = new UserAdd();
     jf.setTitle("เพิ่มข้อมูล");
     jf.setVisible(true);
-
+   
 
 }//GEN-LAST:event_bt_adddataMouseClicked
-
-private void bt_getdataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_getdataMouseClicked
-    try {
-
-        List<UserModel> list = UserService.getuser();
-        DefaultTableModel modeluser = UserService.gettableuser(list);
-
-        tableuser.setModel(modeluser);
-
-
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}//GEN-LAST:event_bt_getdataMouseClicked
 
 private void tableuserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableuserMouseClicked
     int row = tableuser.rowAtPoint(evt.getPoint());
@@ -359,9 +310,9 @@ private void bt_delMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
         boolean status = UserService.deleteuser(id);
 
         if (status) {
-            JOptionPane.showMessageDialog(this, "บันทึกสำเร็จ", "บันทึกข้อมูล", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ลบข้อมูลสำเร็จ", "ลบข้อมูล", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "บันทึกไม่สำเร็จ", "บันทึกข้อมูล", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ลบข้อมูลไม่สำเร็จ", "ลบข้อมูล", JOptionPane.ERROR_MESSAGE);
         }
 
         List<UserModel> list = UserService.getuser();
@@ -397,6 +348,9 @@ private void bt_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         List<UserModel> list = UserService.getuser();
         DefaultTableModel modeluser = UserService.gettableuser(list);
         tableuser.setModel(modeluser);
+        
+
+
 
         edittxt_id.setText("");
         edittxt_user.setText("");
@@ -415,15 +369,21 @@ private void bt_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
         DefaultTableModel modeluser = UserService.gettableuser(list);
         tableuser.setModel(modeluser);// TODO add your handling code here:
 
+        tableuser.setDefaultEditor(Object.class, null);
+
+
+        if (list.size() > 0) {
+            JOptionPane.showMessageDialog(this, "เเสดงข้อมูลทั้งหมด " + list.size() + " เเถว", "เเสดงข้อมูล", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "ไม่พบข้อมูล", "เเสดงข้อมูล", JOptionPane.ERROR_MESSAGE);
+        }
+        txt_search.setText("");
+
     } catch (Exception e) {
         e.printStackTrace();
     }
 
 }//GEN-LAST:event_bt_searchMouseClicked
-
-private void bt_getdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_getdataActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_bt_getdataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,8 +401,6 @@ private void bt_getdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton bt_adddata;
     private javax.swing.JButton bt_del;
     private javax.swing.JButton bt_edit;
-    private javax.swing.JButton bt_exit;
-    private javax.swing.JButton bt_getdata;
     private javax.swing.JButton bt_search;
     private javax.swing.JTextField edittxt_id;
     private javax.swing.JTextField edittxt_name;
@@ -459,7 +417,7 @@ private void bt_getdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableuser;
+    public javax.swing.JTable tableuser;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 }

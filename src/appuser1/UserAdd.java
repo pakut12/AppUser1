@@ -5,9 +5,12 @@
  */
 package appuser1;
 
+import com.pg.lib.model.UserModel;
 import com.pg.lib.service.UserService;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -166,6 +169,13 @@ private void bt_adddataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
         txt_addpass.setText("");
         txt_addname.setText("");
 
+        List<UserModel> list = UserService.getuser();
+        DefaultTableModel modeluser = UserService.gettableuser(list);
+        UserView userv = new UserView();
+        userv.tableuser.setModel(modeluser);
+
+
+     
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -177,11 +187,9 @@ private void bt_adddataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new  
+        java.awt.EventQueue.invokeLater(new Runnable() {
 
-              Runnable() {
-
-                 public void run() {
+            public void run() {
                 new UserAdd().setVisible(true);
             }
         });
