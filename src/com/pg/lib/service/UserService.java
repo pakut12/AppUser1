@@ -8,6 +8,7 @@ import com.pg.lib.model.UserModel;
 import com.pg.lib.utility.ConnectDB;
 import java.sql.*;
 import java.util.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -48,6 +49,35 @@ public class UserService {
             String sql = "SELECT * FROM tb_user";
             conn = ConnectDB.getConnection();
             ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                UserModel user = new UserModel();
+                user.setUser_id(rs.getString("user_id"));
+                user.setUser_name(rs.getString("user_name"));
+                user.setUser_user(rs.getString("user_user"));
+                user.setUser_pass(rs.getString("user_pass"));
+                listuser.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeResources(conn, ps, rs);
+        }
+
+        return listuser;
+    }
+
+    public static List<UserModel> getuserbyid(String id) throws SQLException {
+        List<UserModel> listuser = new ArrayList<UserModel>();
+
+        try {
+            String sql = "SELECT * FROM tb_user where user_id like ?";
+            conn = ConnectDB.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + id + "%"); // Set the placeholder value before executing the query
+
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -160,5 +190,42 @@ public class UserService {
         }
 
         return status;
+    }
+
+    public static DefaultTableModel gettableuser(List<UserModel> listuser) throws SQLException {
+        DefaultTableModel modeluser = new DefaultTableModel();
+        modeluser.addColumn("User_ID");
+        modeluser.addColumn("User_User");
+        modeluser.addColumn("User_Pass");
+        modeluser.addColumn("User_Name");
+
+        try {
+            List<UserModel> list = listuser;
+
+            for (UserModel user : list) {
+                modeluser.addRow(new Object[]{
+                            user.getUser_id(),
+                            user.getUser_user(),
+                            user.getUser_pass(),
+                            user.getUser_name()
+                        });
+
+                System.out.println("-------------------------------------");
+                System.out.println(user.getUser_id());
+                System.out.println(user.getUser_user());
+                System.out.println(user.getUser_pass());
+                System.out.println(user.getUser_name());
+                System.out.println("-------------------------------------");
+
+            }
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return modeluser;
     }
 }

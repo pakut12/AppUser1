@@ -3,8 +3,11 @@
  *
  * Created on 17 กันยายน 2566, 8:51 น.
  */
-
 package appuser1;
+
+import com.pg.lib.service.UserService;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +18,9 @@ public class UserAdd extends javax.swing.JFrame {
     /** Creates new form UserAdd */
     public UserAdd() {
         initComponents();
+        this.setTitle("เพิ่มข้อมูล");
+        this.setLocationRelativeTo(null);
+
     }
 
     /** This method is called from within the constructor to
@@ -31,26 +37,35 @@ public class UserAdd extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txt_adduser = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txt_userpass = new javax.swing.JTextField();
+        txt_addpass = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txt_username = new javax.swing.JTextField();
+        txt_addname = new javax.swing.JTextField();
         bt_adddata = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("เพิ่มข้อมูล User");
 
         jLabel5.setText("USER_USER");
 
+        txt_adduser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel6.setText("USER_PASS");
+
+        txt_addpass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel7.setText("USER_NAME");
 
+        txt_addname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         bt_adddata.setText("เพิ่มข้อมูล");
+        bt_adddata.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_adddataMouseClicked(evt);
+            }
+        });
         bt_adddata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_adddataActionPerformed(evt);
@@ -76,14 +91,11 @@ public class UserAdd extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                         .addGap(2, 2, 2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_userpass, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(txt_adduser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(txt_username, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(bt_adddata, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_adddata, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(txt_addpass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(txt_adduser, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(txt_addname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -98,11 +110,11 @@ public class UserAdd extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_userpass))
+                    .addComponent(txt_addpass))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_username))
+                    .addComponent(txt_addname))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_adddata)
                 .addContainerGap())
@@ -136,12 +148,40 @@ private void bt_adddataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 // TODO add your handling code here:
 }//GEN-LAST:event_bt_adddataActionPerformed
 
+private void bt_adddataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adddataMouseClicked
+    try {
+        String user = txt_adduser.getText();
+        String pass = txt_addpass.getText();
+        String name = txt_addname.getText();
+
+        boolean status = UserService.adduser(user, pass, name);
+
+        if (status) {
+            JOptionPane.showMessageDialog(this, "บันทึกสำเร็จ", "บันทึกข้อมูล", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "บันทึกไม่สำเร็จ", "บันทึกข้อมูล", JOptionPane.ERROR_MESSAGE);
+        }
+
+        txt_adduser.setText("");
+        txt_addpass.setText("");
+        txt_addname.setText("");
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+}//GEN-LAST:event_bt_adddataMouseClicked
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new  
+
+              Runnable() {
+
+                 public void run() {
                 new UserAdd().setVisible(true);
             }
         });
@@ -154,9 +194,8 @@ private void bt_adddataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txt_addname;
+    private javax.swing.JTextField txt_addpass;
     private javax.swing.JTextField txt_adduser;
-    private javax.swing.JTextField txt_username;
-    private javax.swing.JTextField txt_userpass;
     // End of variables declaration//GEN-END:variables
-
 }
